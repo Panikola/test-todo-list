@@ -1,0 +1,48 @@
+@import "variables"
+
+@mixin block-vertical
+  & > *:not(:last-child)
+    margin-bottom: 15px
+
+@mixin block-horizontal
+  & > *:not(:last-child)
+    margin-right: 10px
+
+@mixin page
+  margin: auto
+  display: flex
+  flex-flow: column
+  max-width: 300px
+  @include block-vertical
+
+@mixin page-item
+  display: grid
+  text-align: left
+  input, textarea, select
+    padding: 5px
+    border-radius: $radius
+    border: $border
+    &:focus
+      outline: none
+      border: $border
+      border-radius: $radius
+
+@mixin page-footer
+  margin-top: 14px
+
+@mixin select
+  background-color: white
+  cursor: pointer
+
+@mixin button
+  padding: 5px
+  background-color: $color-accent
+  border-radius: $radius
+  border: $border
+  cursor: pointer
+  &:disabled
+    background-color: $color-disabled
+    border-color: $color-disabled
+
+
+
