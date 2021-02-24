@@ -2,7 +2,7 @@
   div.form
     div.loading( v-if="loading" ) {{ dataChanged ? "Saving..." : "Loading..." }}
     template(v-if="task")
-      label.form-item Title
+      label.form-item(ref="title") Title
         input(v-model="task.title")
       label.form-item Description
         textarea(rows="5" v-model="task.description")
@@ -102,9 +102,16 @@ export default {
   },
   async beforeRouteLeave(to, from, next) {
     if (this.dataChanged) {
-      await this.saveTask();
+      if (this.task.title.length) {
+        await this.saveTask();
+        next();
+      } else {
+        this.$toasted.show("Title is required");
+        this.$refs.title.focus()
+      }
+    } else {
+      next();
     }
-    next();
   }
 };
 </script>
